@@ -196,3 +196,9 @@ Received Import Request.
   path: Assets/Sprites/Character.png
   artifactKey: Guid(85a45a259417409438b200e21b3da1f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Sprites/Character.png using Guid(85a45a259417409438b200e21b3da1f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9655454814daeb29b2f6d94c161cb6ce') in 0.014282 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 380.873613 seconds.
+  path: Assets/Sprites/Star.png
+  artifactKey: Guid(069ce7aabef80084fb48575baa2ab8e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/Star.png using Guid(069ce7aabef80084fb48575baa2ab8e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01605b13216439fff4212884c9ec80b4') in 0.018020 seconds 
