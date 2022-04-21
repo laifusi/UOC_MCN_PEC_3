@@ -214,18 +214,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1097542512133288048, guid: 476d60041d0c11c429f5700668f2dcfa, type: 3}
-      propertyPath: playerInputAction
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 6e25bf8ffa75ab844ab2af0968e0c07f, type: 3}
-    - target: {fileID: 1097542512133288048, guid: 476d60041d0c11c429f5700668f2dcfa, type: 3}
-      propertyPath: playerInputAction.m_Id
-      value: 94409917-579c-43a0-8a2b-1d87b7104251
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097542512133288048, guid: 476d60041d0c11c429f5700668f2dcfa, type: 3}
-      propertyPath: playerInputAction.m_Name
-      value: Player Input
-      objectReference: {fileID: 0}
     - target: {fileID: 1097542512133288052, guid: 476d60041d0c11c429f5700668f2dcfa, type: 3}
       propertyPath: m_Name
       value: Character
