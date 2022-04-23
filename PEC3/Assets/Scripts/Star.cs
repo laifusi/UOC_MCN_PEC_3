@@ -5,6 +5,12 @@ public class Star : MonoBehaviour
 {
     public static Action OnBoxIn;
     public static Action OnBoxOut;
+    public static Action OnStar;
+
+    private void Start()
+    {
+        OnStar?.Invoke();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

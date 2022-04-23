@@ -6,10 +6,20 @@ public class GameManager : MonoBehaviour
     private int starsToFill;
     private int starsFilled;
 
+    private void Awake()
+    {
+        Star.OnStar += CountStar;
+    }
+
     private void Start()
     {
         Star.OnBoxIn += BoxIn;
         Star.OnBoxOut += BoxOut;
+    }
+
+    private void CountStar()
+    {
+        starsToFill++;
     }
 
     private void BoxIn()
@@ -26,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void WinLevel()
     {
-        throw new NotImplementedException();
+        Debug.Log("Level won!");
     }
 
 
@@ -34,5 +44,6 @@ public class GameManager : MonoBehaviour
     {
         Star.OnBoxIn -= BoxIn;
         Star.OnBoxOut -= BoxOut;
+        Star.OnStar -= CountStar;
     }
 }
