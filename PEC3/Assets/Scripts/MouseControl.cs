@@ -74,8 +74,21 @@ public class MouseControl : MonoBehaviour
         EditorManager.Instance.PlaceElement(posx, posy);
     }
 
-    public void CanBePlaced(Vector3 position)
+    public void EmptyElementToPlace(CallbackContext context)
     {
-        placePosition = position;
+        if (!context.started)
+            return;
+
+        if(spriteRenderer.sprite == null)
+        {
+            int posx = (int)transform.position.x;
+            int posy = (int)transform.position.y;
+            EditorManager.Instance.DeleteElement(posx, posy);
+        }
+        else
+        {
+            spriteRenderer.sprite = null;
+            EditorManager.Instance.DeselectElement();
+        }
     }
 }

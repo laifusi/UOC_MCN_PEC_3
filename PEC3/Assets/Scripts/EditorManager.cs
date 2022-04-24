@@ -16,6 +16,7 @@ public class EditorManager : MonoBehaviour
 
     private PlaceableDetection[,] grid;
     private Element[,] elementsPlaced;
+    private GameObject[,] GOPlaced;
     private Element elementToPlace;
     private Sprite spriteToPlace;
 
@@ -38,15 +39,17 @@ public class EditorManager : MonoBehaviour
     public void SetGrid()
     {
         DestroyBackground();
+        DestroyElements();
         int x = int.Parse(inputFieldX.text);
         int y = int.Parse(inputFieldY.text);
         grid = new PlaceableDetection[x, y];
         elementsPlaced = new Element[x, y];
-        for(int i = -x/2; i <= x/2; i++)
+        GOPlaced = new GameObject[x, y];
+        for (int i = -x / 2; i <= x / 2; i++)
         {
             if (i == x / 2 && x % 2 == 0)
                 break;
-            for(int j = -y/2; j <= y/2; j++)
+            for (int j = -y / 2; j <= y / 2; j++)
             {
                 if (j == y / 2 && y % 2 == 0)
                     break;
@@ -64,9 +67,20 @@ public class EditorManager : MonoBehaviour
 
     private void DestroyBackground()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    private void DestroyElements()
+    {
+        if (GOPlaced != null)
+        {
+            foreach (GameObject go in GOPlaced)
+            {
+                Destroy(go);
+            }
         }
     }
 
@@ -97,21 +111,40 @@ public class EditorManager : MonoBehaviour
         }
     }
 
+    public void DeselectElement()
+    {
+        spriteToPlace = null;
+        elementToPlace = Element.Empty;
+    }
+
     public void PlaceElement(int x, int y)
     {
         int gridX = int.Parse(inputFieldX.text);
         int gridY = int.Parse(inputFieldY.text);
-        if (x+gridX/2 >= 0 && y+gridY/2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && grid[x + gridX / 2, y + gridY / 2].IsAvailable)
+        if (x+gridX/2 >= 0 && y+gridY/2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && grid[x + gridX / 2, y + gridY / 2].IsAvailable && spriteToPlace != null)
         {
             GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x, y, 0), Quaternion.identity);
             gameObject.GetComponent<SpriteRenderer>().sprite = spriteToPlace;
             grid[x + gridX / 2, y + gridY / 2].UseTile(true);
             elementsPlaced[x + gridX / 2, y + gridY / 2] = elementToPlace;
+            GOPlaced[x + gridX / 2, y + gridY / 2] = gameObject;
+        }
+    }
+
+    public void DeleteElement(int x, int y)
+    {
+        int gridX = int.Parse(inputFieldX.text);
+        int gridY = int.Parse(inputFieldY.text);
+        if (x + gridX / 2 >= 0 && y + gridY / 2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && !grid[x + gridX / 2, y + gridY / 2].IsAvailable)
+        {
+            grid[x + gridX / 2, y + gridY / 2].UseTile(false);
+            elementsPlaced[x + gridX / 2, y + gridY / 2] = Element.Empty;
+            Destroy(GOPlaced[x + gridX / 2, y + gridY / 2]);
         }
     }
 }
 
 public enum Element
 {
-    Character, Star, Box, Wall
+    Empty, Character, Star, Box, Wall
 }
