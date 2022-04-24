@@ -12,6 +12,7 @@ public class MouseControl : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public static MouseControl Instance; //Instance of the MouseControl
+    private Vector3 placePosition;
 
     private void Start()
     {
@@ -61,5 +62,20 @@ public class MouseControl : MonoBehaviour
             mainCamera.orthographicSize = 2;
         else if (mainCamera.orthographicSize > 50)
             mainCamera.orthographicSize = 50;
+    }
+
+    public void Place(CallbackContext context)
+    {
+        if (!context.started)
+            return;
+
+        int posx = (int)transform.position.x;
+        int posy = (int)transform.position.y;
+        EditorManager.Instance.PlaceElement(posx, posy);
+    }
+
+    public void CanBePlaced(Vector3 position)
+    {
+        placePosition = position;
     }
 }

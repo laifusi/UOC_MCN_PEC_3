@@ -340,6 +340,7 @@ MonoBehaviour:
   boxSprite: {fileID: 21300000, guid: 8b126b62817b80f46ad6fd4992c68f56, type: 3}
   wallSprite: {fileID: 21300000, guid: 5ead05f0577c7b74aa092d687227d047, type: 3}
   backgroundPrefab: {fileID: 3737945391644626677, guid: 373b4fd5429eb2e4288678ffc520a217, type: 3}
+  placedObjectPrefab: {fileID: 1213652685407899395, guid: ffd2aaf9e826e44409e50852e33a8ac3, type: 3}
   inputFieldX: {fileID: 2084561104}
   inputFieldY: {fileID: 515504707}
 --- !u!4 &62893641
@@ -1532,7 +1533,19 @@ MonoBehaviour:
     m_ActionId: 9c997935-8f9e-4d40-b0c7-018f339cb600
     m_ActionName: Mouse/Position[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1236386297}
+        m_TargetAssemblyTypeName: MouseControl, Assembly-CSharp
+        m_MethodName: Place
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a55043da-1edf-4d9b-b103-47fd8ff00713
     m_ActionName: Mouse/ClickLeft[/Mouse/leftButton]
   - m_PersistentCalls:
