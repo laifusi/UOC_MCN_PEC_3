@@ -60,16 +60,16 @@ public class MenuManager : MonoBehaviour
         FileInfo[] levelsSaved = directoryInfo.GetFiles();
         foreach(FileInfo level in levelsSaved)
         {
-            TMP_Text levelButtonText = Instantiate(levelButtonPrefab, levelsPanel).GetComponentInChildren<TMP_Text>();
-            levelButtonText.text = level.Name;
-            Debug.Log(level.FullName);
-            Debug.Log(level.Name);
+            Button levelButton = Instantiate(levelButtonPrefab, levelsPanel).GetComponent<Button>();
+            TMP_Text levelButtonText = levelButton.GetComponentInChildren<TMP_Text>();
+            levelButtonText.text = level.Name.Split(".txt"[0])[0];
+            levelButton.onClick.AddListener(() => LoadLevel(level.Name));
         }
     }
 
     public void LoadLevel(string levelName)
     {
-        if(File.Exists(LevelsPath + levelName + ".txt"))
+        if(File.Exists(LevelsPath + levelName))
         {
             string savedLevel = File.ReadAllText(LevelsPath + levelName);
             SaveData data = JsonUtility.FromJson<SaveData>(savedLevel);
