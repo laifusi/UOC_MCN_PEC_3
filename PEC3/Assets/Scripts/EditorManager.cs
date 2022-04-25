@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class EditorManager : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class EditorManager : MonoBehaviour
     private PlaceableDetection[,] grid;
     private Element[,] elementsPlaced;
     private GameObject[,] GOPlaced;
+    private GridData[,] gridData;
     private Element elementToPlace;
     private Sprite spriteToPlace;
 
@@ -142,9 +144,38 @@ public class EditorManager : MonoBehaviour
             Destroy(GOPlaced[x + gridX / 2, y + gridY / 2]);
         }
     }
+
+    public void SaveGrid()
+    {
+        int gridX = int.Parse(inputFieldX.text);
+        int gridY = int.Parse(inputFieldY.text);
+        gridData = new GridData[gridX, gridY];
+        for (int i = -gridX / 2; i <= gridX / 2; i++)
+        {
+            if (i == gridX / 2 && gridX % 2 == 0)
+                break;
+            for (int j = -gridY / 2; j <= gridY / 2; j++)
+            {
+                if (j == gridY / 2 && gridY % 2 == 0)
+                    break;
+
+                GridData elementAdded = new GridData();
+                elementAdded.TypeOfElement = elementsPlaced[i + gridX / 2, j + gridY / 2];
+                elementAdded.Position = new Vector3(i, j, 0);
+                gridData[i + gridX / 2, j + gridY / 2] = elementAdded;
+            }
+        }
+    }
 }
 
 public enum Element
 {
     Empty, Character, Star, Box, Wall
+}
+
+[Serializable]
+public struct GridData
+{
+    public Element TypeOfElement;
+    public Vector3 Position;
 }
