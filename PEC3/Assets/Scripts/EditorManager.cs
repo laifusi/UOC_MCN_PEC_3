@@ -21,6 +21,7 @@ public class EditorManager : MonoBehaviour
     private GridData[,] gridData;
     private Element elementToPlace;
     private Sprite spriteToPlace;
+    private string levelName;
 
     public static EditorManager Instance; //Instance of the MouseControl
 
@@ -36,6 +37,11 @@ public class EditorManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ChangeLevelName(string value)
+    {
+        levelName = value;
     }
 
     public void SetGrid()
@@ -165,9 +171,13 @@ public class EditorManager : MonoBehaviour
                 gridData[i + gridX / 2, j + gridY / 2] = elementAdded;
             }
         }
+
+        if(levelName != null && levelName != string.Empty)
+            MenuManager.Instance.SaveLevel(gridData, levelName);
     }
 }
 
+[Serializable]
 public enum Element
 {
     Empty, Character, Star, Box, Wall

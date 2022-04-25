@@ -12,7 +12,6 @@ public class MouseControl : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     public static MouseControl Instance; //Instance of the MouseControl
-    private Vector3 placePosition;
 
     private void Start()
     {
