@@ -175,6 +175,11 @@ public class EditorManager : MonoBehaviour
         if(levelName != null && levelName != string.Empty)
             MenuManager.Instance.SaveLevel(gridData, levelName);
     }
+
+    public void BackToMenu()
+    {
+        MenuManager.Instance.Menu();
+    }
 }
 
 [Serializable]

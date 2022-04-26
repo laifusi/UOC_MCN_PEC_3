@@ -532,7 +532,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -350, y: -99.99997}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &80137692
 MonoBehaviour:
@@ -666,7 +666,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -100, y: -100}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &96893369
 MonoBehaviour:
@@ -711,7 +711,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 96893370}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 62893640}
+        m_TargetAssemblyTypeName: EditorManager, Assembly-CSharp
+        m_MethodName: BackToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &96893370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1324,7 +1336,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -225, y: -100}
-  m_SizeDelta: {x: 250, y: 100}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &476575675
 MonoBehaviour:
@@ -2636,8 +2648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c26390f6a5be14da07ba1cd81cd16a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DataToLoad:
-    gridData: []
   levelButtonPrefab: {fileID: 0}
   levelsPanel: {fileID: 0}
 --- !u!4 &1728149124

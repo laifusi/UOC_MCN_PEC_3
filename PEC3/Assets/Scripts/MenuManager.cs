@@ -29,7 +29,6 @@ public class MenuManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -94,6 +93,11 @@ public class MenuManager : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene("Game");
     }
 
     public void Exit()
