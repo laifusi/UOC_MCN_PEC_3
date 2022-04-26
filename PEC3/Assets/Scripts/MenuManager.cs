@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -73,9 +74,25 @@ public class MenuManager : MonoBehaviour
         {
             string savedLevel = File.ReadAllText(LevelsPath + levelName);
             SaveData data = JsonUtility.FromJson<SaveData>(savedLevel);
-            Debug.Log(data.gridData[5].Position);
-            Debug.Log(savedLevel);
+            SceneManager.LoadScene("Game");
         }
+    }
+
+    public void Play()
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
+        FileInfo[] levelsSaved = directoryInfo.GetFiles();
+        LoadLevel(levelsSaved[0].Name);
+    }
+
+    public void CreateLevel()
+    {
+        SceneManager.LoadScene("Editor");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
 
