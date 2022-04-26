@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance; //Instance of the MenuManager
+    public static SaveData DataToLoad;
 
     private static string LevelsPath;
 
@@ -73,7 +74,7 @@ public class MenuManager : MonoBehaviour
         if(File.Exists(LevelsPath + levelName))
         {
             string savedLevel = File.ReadAllText(LevelsPath + levelName);
-            SaveData data = JsonUtility.FromJson<SaveData>(savedLevel);
+            DataToLoad = JsonUtility.FromJson<SaveData>(savedLevel);
             SceneManager.LoadScene("Game");
         }
     }
@@ -88,6 +89,11 @@ public class MenuManager : MonoBehaviour
     public void CreateLevel()
     {
         SceneManager.LoadScene("Editor");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public void Exit()
