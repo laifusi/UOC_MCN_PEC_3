@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance; //Instance of the MenuManager
     public static SaveData DataToLoad;
+    public static bool PreloadedLevelToEdit;
 
     private static string LevelsPath;
 
@@ -36,9 +37,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void SaveLevel(GridData[,] allGridData, string name)
+    public void SaveLevel(GridData[,] allGridData, string name, int width, int height)
     {
         SaveData allData = TransformMatrixToArray(allGridData);
+        allData.width = width;
+        allData.height = height;
         string json = JsonUtility.ToJson(allData);
         File.WriteAllText(LevelsPath + name + ".txt", json);
     }
@@ -78,6 +81,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void TestLevel(GridData[,] allGridData, int width, int height)
+    {
+        DataToLoad = TransformMatrixToArray(allGridData);
+        DataToLoad.width = width;
+        DataToLoad.height = height;
+        SceneManager.LoadScene("TestGame");
+    }
+
     public void Play()
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
@@ -100,6 +111,17 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void ReloadTestLevel()
+    {
+        SceneManager.LoadScene("TestGame");
+    }
+
+    public void BackToEditMode()
+    {
+        PreloadedLevelToEdit = true;
+        CreateLevel();
+    }
+
     public void Exit()
     {
         Application.Quit();
@@ -110,4 +132,6 @@ public class MenuManager : MonoBehaviour
 public struct SaveData
 {
     public GridData[] gridData;
+    public int width;
+    public int height;
 }

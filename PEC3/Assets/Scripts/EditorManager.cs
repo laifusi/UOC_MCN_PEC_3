@@ -22,13 +22,13 @@ public class EditorManager : MonoBehaviour
     private Element elementToPlace;
     private Sprite spriteToPlace;
     private string levelName;
+    private int gridX;
+    private int gridY;
 
     public static EditorManager Instance; //Instance of the MouseControl
 
     private void Start()
     {
-        SetGrid();
-
         if (Instance == null)
         {
             Instance = this;
@@ -36,6 +36,15 @@ public class EditorManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if(MenuManager.PreloadedLevelToEdit)
+        {
+            PreloadLevel();
+        }
+        else
+        {
+            SetGrid();
         }
     }
 
@@ -48,18 +57,18 @@ public class EditorManager : MonoBehaviour
     {
         DestroyBackground();
         DestroyElements();
-        int x = int.Parse(inputFieldX.text);
-        int y = int.Parse(inputFieldY.text);
-        grid = new PlaceableDetection[x, y];
-        elementsPlaced = new Element[x, y];
-        GOPlaced = new GameObject[x, y];
-        for (int i = -x / 2; i <= x / 2; i++)
+        gridX = int.Parse(inputFieldX.text);
+        gridY = int.Parse(inputFieldY.text);
+        grid = new PlaceableDetection[gridX, gridY];
+        elementsPlaced = new Element[gridX, gridY];
+        GOPlaced = new GameObject[gridX, gridY];
+        for (int i = -gridX / 2; i <= gridX / 2; i++)
         {
-            if (i == x / 2 && x % 2 == 0)
+            if (i == gridX / 2 && gridX % 2 == 0)
                 break;
-            for (int j = -y / 2; j <= y / 2; j++)
+            for (int j = -gridY / 2; j <= gridY / 2; j++)
             {
-                if (j == y / 2 && y % 2 == 0)
+                if (j == gridY / 2 && gridY % 2 == 0)
                     break;
 
                 GameObject gridElement = Instantiate(backgroundPrefab, new Vector3(i, j, 0), Quaternion.identity, transform);
@@ -67,7 +76,7 @@ public class EditorManager : MonoBehaviour
                 int posx = (int)gridElement.transform.position.x;
                 int posy = (int)gridElement.transform.position.y;
                 gridElement.transform.position = new Vector3(posx, posy, 0);
-                grid[i + x / 2, j + y / 2] = gridElement.GetComponent<PlaceableDetection>();
+                grid[i + gridX / 2, j + gridY / 2] = gridElement.GetComponent<PlaceableDetection>();
                 gridElement.GetComponent<SpriteRenderer>().sortingOrder = 5;
             }
         }
@@ -90,6 +99,44 @@ public class EditorManager : MonoBehaviour
                 Destroy(go);
             }
         }
+    }
+
+    public void PreloadLevel()
+    {
+        SaveData data = MenuManager.DataToLoad;
+        inputFieldX.text = data.width.ToString();
+        inputFieldY.text = data.height.ToString();
+        inputFieldX.onValueChanged.Invoke(inputFieldX.text); // We force the call of the onValueChanged event in case the saved grid size is the same as the default values
+        foreach (GridData grid in data.gridData)
+        {
+            switch (grid.TypeOfElement)
+            {
+                case Element.Character:
+                    spriteToPlace = characterSprite;
+                    elementToPlace = Element.Character;
+                    break;
+                case Element.Star:
+                    spriteToPlace = starSprite;
+                    elementToPlace = Element.Star;
+                    break;
+                case Element.Box:
+                    spriteToPlace = boxSprite;
+                    elementToPlace = Element.Box;
+                    break;
+                case Element.Wall:
+                    spriteToPlace = wallSprite;
+                    elementToPlace = Element.Wall;
+                    break;
+            }
+            
+            if(grid.TypeOfElement != Element.Empty)
+            {
+                PlaceElement((int)grid.Position.x, (int)grid.Position.y);
+            }
+        }
+
+        spriteToPlace = null;
+        elementToPlace = Element.Empty;
     }
 
     public void SelectElement(string elementChosen)
@@ -127,8 +174,6 @@ public class EditorManager : MonoBehaviour
 
     public void PlaceElement(int x, int y)
     {
-        int gridX = int.Parse(inputFieldX.text);
-        int gridY = int.Parse(inputFieldY.text);
         if (x+gridX/2 >= 0 && y+gridY/2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && grid[x + gridX / 2, y + gridY / 2].IsAvailable && spriteToPlace != null)
         {
             GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x, y, 0), Quaternion.identity);
@@ -141,8 +186,6 @@ public class EditorManager : MonoBehaviour
 
     public void DeleteElement(int x, int y)
     {
-        int gridX = int.Parse(inputFieldX.text);
-        int gridY = int.Parse(inputFieldY.text);
         if (x + gridX / 2 >= 0 && y + gridY / 2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && !grid[x + gridX / 2, y + gridY / 2].IsAvailable)
         {
             grid[x + gridX / 2, y + gridY / 2].UseTile(false);
@@ -151,10 +194,16 @@ public class EditorManager : MonoBehaviour
         }
     }
 
+    public void SaveLevel()
+    {
+        SaveGrid();
+
+        if (levelName != null && levelName != string.Empty)
+            MenuManager.Instance.SaveLevel(gridData, levelName, gridX, gridY);
+    }
+
     public void SaveGrid()
     {
-        int gridX = int.Parse(inputFieldX.text);
-        int gridY = int.Parse(inputFieldY.text);
         gridData = new GridData[gridX, gridY];
         for (int i = -gridX / 2; i <= gridX / 2; i++)
         {
@@ -171,14 +220,18 @@ public class EditorManager : MonoBehaviour
                 gridData[i + gridX / 2, j + gridY / 2] = elementAdded;
             }
         }
+    }
 
-        if(levelName != null && levelName != string.Empty)
-            MenuManager.Instance.SaveLevel(gridData, levelName);
+    public void TestLevel()
+    {
+        SaveGrid();
+        MenuManager.Instance.TestLevel(gridData, gridX, gridY);
     }
 
     public void BackToMenu()
     {
         MenuManager.Instance.Menu();
+        MenuManager.PreloadedLevelToEdit = false;
     }
 }
 
