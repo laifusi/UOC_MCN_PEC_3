@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
         SaveData allData = TransformMatrixToArray(allGridData);
         allData.width = width;
         allData.height = height;
+        allData.levelName = name;
         string json = JsonUtility.ToJson(allData);
         File.WriteAllText(LevelsPath + name + ".txt", json);
     }
@@ -58,16 +59,27 @@ public class MenuManager : MonoBehaviour
         return array;
     }
 
-    public void FindLevels()
+    public void FindLevels(string type)
     {
+        foreach(Transform child in levelsPanel)
+        {
+            Destroy(child.gameObject);
+        }
+
         DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
         FileInfo[] levelsSaved = directoryInfo.GetFiles();
         foreach(FileInfo level in levelsSaved)
         {
-            Button levelButton = Instantiate(levelButtonPrefab, levelsPanel).GetComponent<Button>();
-            TMP_Text levelButtonText = levelButton.GetComponentInChildren<TMP_Text>();
-            levelButtonText.text = level.Name.Split(".txt"[0])[0];
-            levelButton.onClick.AddListener(() => LoadLevel(level.Name));
+            if(level.Name.Split(".txt")[1] == "")
+            {
+                Button levelButton = Instantiate(levelButtonPrefab, levelsPanel).GetComponent<Button>();
+                TMP_Text levelButtonText = levelButton.GetComponentInChildren<TMP_Text>();
+                levelButtonText.text = level.Name.Split(".txt"[0])[0];
+                if (type == "Play")
+                    levelButton.onClick.AddListener(() => LoadLevel(level.Name));
+                else
+                    levelButton.onClick.AddListener(() => EditLevel(level.Name));
+            }
         }
     }
 
@@ -81,11 +93,23 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void TestLevel(GridData[,] allGridData, int width, int height)
+    private void EditLevel(string levelName)
+    {
+        if (File.Exists(LevelsPath + levelName))
+        {
+            string savedLevel = File.ReadAllText(LevelsPath + levelName);
+            DataToLoad = JsonUtility.FromJson<SaveData>(savedLevel);
+            PreloadedLevelToEdit = true;
+            SceneManager.LoadScene("Editor");
+        }
+    }
+
+    public void TestLevel(GridData[,] allGridData, int width, int height, string levelName)
     {
         DataToLoad = TransformMatrixToArray(allGridData);
         DataToLoad.width = width;
         DataToLoad.height = height;
+        DataToLoad.levelName = levelName;
         SceneManager.LoadScene("TestGame");
     }
 
@@ -134,4 +158,5 @@ public struct SaveData
     public GridData[] gridData;
     public int width;
     public int height;
+    public string levelName;
 }

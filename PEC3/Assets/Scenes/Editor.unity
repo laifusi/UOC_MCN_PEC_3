@@ -344,6 +344,7 @@ MonoBehaviour:
   placedObjectPrefab: {fileID: 1213652685407899395, guid: ffd2aaf9e826e44409e50852e33a8ac3, type: 3}
   inputFieldX: {fileID: 2084561104}
   inputFieldY: {fileID: 515504707}
+  levelNameField: {fileID: 101824146}
 --- !u!4 &62893641
 Transform:
   m_ObjectHideFlags: 0
@@ -775,7 +776,7 @@ GameObject:
   - component: {fileID: 101824147}
   - component: {fileID: 101824146}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: LevelNameInputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1384,7 +1385,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 62893640}
         m_TargetAssemblyTypeName: EditorManager, Assembly-CSharp
-        m_MethodName: SaveGrid
+        m_MethodName: SaveLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1445,7 +1446,7 @@ GameObject:
   - component: {fileID: 515504708}
   - component: {fileID: 515504707}
   m_Layer: 5
-  m_Name: InputField (TMP) (1)
+  m_Name: HeightInputField (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3036,7 +3037,7 @@ GameObject:
   - component: {fileID: 2084561105}
   - component: {fileID: 2084561104}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: WidthInputField (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

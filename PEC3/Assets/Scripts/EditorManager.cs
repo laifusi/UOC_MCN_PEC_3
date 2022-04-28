@@ -14,6 +14,7 @@ public class EditorManager : MonoBehaviour
     [SerializeField] private GameObject placedObjectPrefab;
     [SerializeField] private TMP_InputField inputFieldX;
     [SerializeField] private TMP_InputField inputFieldY;
+    [SerializeField] private TMP_InputField levelNameField;
 
     private PlaceableDetection[,] grid;
     private Element[,] elementsPlaced;
@@ -104,9 +105,11 @@ public class EditorManager : MonoBehaviour
     public void PreloadLevel()
     {
         SaveData data = MenuManager.DataToLoad;
+        levelNameField.text = data.levelName;
         inputFieldX.text = data.width.ToString();
         inputFieldY.text = data.height.ToString();
         inputFieldX.onValueChanged.Invoke(inputFieldX.text); // We force the call of the onValueChanged event in case the saved grid size is the same as the default values
+
         foreach (GridData grid in data.gridData)
         {
             switch (grid.TypeOfElement)
@@ -225,7 +228,7 @@ public class EditorManager : MonoBehaviour
     public void TestLevel()
     {
         SaveGrid();
-        MenuManager.Instance.TestLevel(gridData, gridX, gridY);
+        MenuManager.Instance.TestLevel(gridData, gridX, gridY, levelName);
     }
 
     public void BackToMenu()
