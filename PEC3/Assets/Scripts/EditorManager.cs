@@ -18,6 +18,7 @@ public class EditorManager : MonoBehaviour
 
     private PlaceableDetection[,] grid;
     private Element[,] elementsPlaced;
+    private Element[,] externalWalls;
     private GameObject[,] GOPlaced;
     private GridData[,] gridData;
     private Element elementToPlace;
@@ -62,6 +63,7 @@ public class EditorManager : MonoBehaviour
         gridY = int.Parse(inputFieldY.text);
         grid = new PlaceableDetection[gridX, gridY];
         elementsPlaced = new Element[gridX, gridY];
+        externalWalls = new Element[gridX + 2, gridY + 2];
         GOPlaced = new GameObject[gridX, gridY];
         for (int i = -gridX / 2; i <= gridX / 2; i++)
         {
@@ -71,7 +73,7 @@ public class EditorManager : MonoBehaviour
             {
                 if (j == gridY / 2 && gridY % 2 == 0)
                     break;
-
+                
                 GameObject gridElement = Instantiate(backgroundPrefab, new Vector3(i, j, 0), Quaternion.identity, transform);
 
                 int posx = (int)gridElement.transform.position.x;
@@ -79,6 +81,19 @@ public class EditorManager : MonoBehaviour
                 gridElement.transform.position = new Vector3(posx, posy, 0);
                 grid[i + gridX / 2, j + gridY / 2] = gridElement.GetComponent<PlaceableDetection>();
                 gridElement.GetComponent<SpriteRenderer>().sortingOrder = 5;
+            }
+        }
+
+        for (int i = 0; i < gridX + 2; i++)
+        {
+            for (int j = 0; j < gridY + 2; j++)
+            {
+                if (i == 0 || i == gridX + 1 || j == 0 || j == gridY + 1)
+                {
+                    spriteToPlace = wallSprite;
+                    elementToPlace = Element.Wall;
+                    PlaceExternalWall(i, j);
+                }
             }
         }
     }
@@ -185,6 +200,15 @@ public class EditorManager : MonoBehaviour
             elementsPlaced[x + gridX / 2, y + gridY / 2] = elementToPlace;
             GOPlaced[x + gridX / 2, y + gridY / 2] = gameObject;
         }
+    }
+
+    public void PlaceExternalWall(int x, int y)
+    {
+        GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x - gridX/2 - 1, y - gridY/2 - 1, 0), Quaternion.identity);
+        gameObject.GetComponent<SpriteRenderer>().sprite = spriteToPlace;
+        Debug.Log(y + 1 + gridY/2);
+        Debug.Log(x + 1 + gridX / 2);
+        externalWalls[x, y] = elementToPlace;
     }
 
     public void DeleteElement(int x, int y)
