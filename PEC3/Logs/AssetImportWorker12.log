@@ -1091,3 +1091,40 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 578.304994 seconds.
+  path: Assets/Scenes/Game.unity
+  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Game.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3b5ac2e93cf9762579ea46f2c50fb40') in 0.012473 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.712925 seconds.
+  path: Assets/Scenes/TestGame.unity
+  artifactKey: Guid(00eb2c7416acaf449adf56168bfc8057) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/TestGame.unity using Guid(00eb2c7416acaf449adf56168bfc8057) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '540972f4785d2e499b14f342ed984d62') in 0.008370 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 3.695214 seconds.
+  path: Assets/Scenes/Editor.unity
+  artifactKey: Guid(ceb0783674ce7ff46996cbc28a4dfde9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Editor.unity using Guid(ceb0783674ce7ff46996cbc28a4dfde9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2787b656bebf22d32d71edded43e1d67') in 0.007654 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 95.379848 seconds.
+  path: Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset
+  artifactKey: Guid(5302535af1044152a457ed104f1f4b91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset using Guid(5302535af1044152a457ed104f1f4b91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa607f4942dbe7f0ecbc4e9bb2e56ff1') in 0.325807 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 34.775976 seconds.
+  path: Assets/Scenes/Image.prefab
+  artifactKey: Guid(d674bb65c3b3aac4da29c5b919878d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Image.prefab using Guid(d674bb65c3b3aac4da29c5b919878d9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd93d475ad7b050406a11cd108e8a5827') in 0.061111 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 89.523646 seconds.
+  path: Assets/Prefabs/Character.prefab
+  artifactKey: Guid(476d60041d0c11c429f5700668f2dcfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Character.prefab using Guid(476d60041d0c11c429f5700668f2dcfa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) Tried select unknown importer for id '-2' '00000000000000000000000000000000'
+ -> (artifact id: 'e3db37f1c43bb30909cfcb6acfee7092') in 0.079661 seconds 
