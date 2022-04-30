@@ -1,16 +1,21 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private int starsToFill;
     private int starsFilled;
+    private string levelName;
 
     [SerializeField] private GameObject characterPrefab;
     [SerializeField] private GameObject starPrefab;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject backgroundPrefab;
+    [SerializeField] private TMP_Text levelNameText;
+    [SerializeField] private GameObject levelWonCanvas;
 
     private void Awake()
     {
@@ -28,6 +33,8 @@ public class GameManager : MonoBehaviour
     private void LoadLevel()
     {
         SaveData data = MenuManager.DataToLoad;
+        levelName = data.levelName;
+        levelNameText.SetText(levelName != null ? levelName : "(unnamed)");
         foreach(GridData grid in data.gridData)
         {
             switch(grid.TypeOfElement)
@@ -78,16 +85,23 @@ public class GameManager : MonoBehaviour
         starsFilled++;
 
         if (starsFilled == starsToFill)
-            WinLevel();
+            StartCoroutine(WinLevel());
     }
     private void BoxOut()
     {
         starsFilled--;
     }
 
-    private void WinLevel()
+    private IEnumerator WinLevel()
     {
-        Debug.Log("Level won!");
+        levelWonCanvas.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        if (MenuManager.TestingMode)
+            MenuManager.Instance.ReloadTestLevel();
+        else
+            MenuManager.Instance.LoadNextLevel(levelName);
     }
 
 

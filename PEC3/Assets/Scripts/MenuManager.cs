@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance; //Instance of the MenuManager
     public static SaveData DataToLoad;
     public static bool PreloadedLevelToEdit;
+    public static bool TestingMode;
 
     private static string LevelsPath;
 
@@ -93,6 +95,32 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void LoadNextLevel(string levelName)
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
+        FileInfo[] filesFound = directoryInfo.GetFiles();
+        List<FileInfo> levelsSaved = new List<FileInfo>();
+        string levelToLoad = "";
+        for (int i = 0; i < filesFound.Length; i++)
+        {
+            if (filesFound[i].Name.Split(".txt")[1] == "")
+            {
+                levelsSaved.Add(filesFound[i]);
+            }
+        }
+        for (int i = 0; i < levelsSaved.Count; i++)
+        {
+            if (i < levelsSaved.Count - 1 && levelsSaved[i].Name.Split(".txt")[0] == levelName)
+            {
+                levelToLoad = levelsSaved[i + 1].Name;
+            }
+        }
+        if (levelToLoad != "")
+            LoadLevel(levelToLoad);
+        else
+            Menu();
+    }
+
     private void EditLevel(string levelName)
     {
         if (File.Exists(LevelsPath + levelName))
@@ -110,6 +138,7 @@ public class MenuManager : MonoBehaviour
         DataToLoad.width = width;
         DataToLoad.height = height;
         DataToLoad.levelName = levelName;
+        TestingMode = true;
         SceneManager.LoadScene("TestGame");
     }
 
@@ -143,6 +172,7 @@ public class MenuManager : MonoBehaviour
     public void BackToEditMode()
     {
         PreloadedLevelToEdit = true;
+        TestingMode = false;
         CreateLevel();
     }
 
