@@ -123,7 +123,7 @@ public class EditorManager : MonoBehaviour
         levelNameField.text = data.levelName;
         inputFieldX.text = data.width.ToString();
         inputFieldY.text = data.height.ToString();
-        inputFieldX.onValueChanged.Invoke(inputFieldX.text); // We force the call of the onValueChanged event in case the saved grid size is the same as the default values
+        inputFieldX.onEndEdit.Invoke(inputFieldX.text); // We force the call of the onValueChanged event in case the saved grid size is the same as the default values
 
         foreach (GridData grid in data.gridData)
         {
@@ -204,10 +204,8 @@ public class EditorManager : MonoBehaviour
 
     public void PlaceExternalWall(int x, int y)
     {
-        GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x - gridX/2 - 1, y - gridY/2 - 1, 0), Quaternion.identity);
+        GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x - gridX/2 - 1, y - gridY/2 - 1, 0), Quaternion.identity, transform);
         gameObject.GetComponent<SpriteRenderer>().sprite = spriteToPlace;
-        Debug.Log(y + 1 + gridY/2);
-        Debug.Log(x + 1 + gridX / 2);
         externalWalls[x, y] = elementToPlace;
     }
 
