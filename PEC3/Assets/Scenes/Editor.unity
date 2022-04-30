@@ -1942,6 +1942,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 78b23c0e-f2e5-4874-b5ac-38cc84ac6adf
     m_ActionName: Mouse/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1236386297}
+        m_TargetAssemblyTypeName: MouseControl, Assembly-CSharp
+        m_MethodName: MoveCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7c09211d-171d-4fb8-ac04-4b7628031424
+    m_ActionName: Mouse/MoveCamera[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mouse
