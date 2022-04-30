@@ -20,7 +20,12 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        LevelsPath = Application.dataPath + "/Levels/";
+        #if UNITY_EDITOR
+                LevelsPath = "/Resources/Levels/";
+        #else
+                LevelsPath = Application.dataPath + "/Levels/";
+        
+        #endif
         if (!Directory.Exists(LevelsPath))
         {
             Directory.CreateDirectory(LevelsPath);
@@ -29,6 +34,11 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        TextAsset[] premadeLevels = Resources.LoadAll<TextAsset>("Levels/");
+        foreach(TextAsset level in premadeLevels)
+        {
+            File.WriteAllText(LevelsPath + level.name + ".txt", level.text);
+        }
         if (Instance == null)
         {
             Instance = this;
