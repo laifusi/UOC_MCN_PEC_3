@@ -380,7 +380,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -150, y: -175}
-  m_SizeDelta: {x: 226.90002, y: 174.29999}
+  m_SizeDelta: {x: 226.90002, y: 69.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607835629
 MonoBehaviour:
@@ -514,7 +514,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -150, y: -100}
-  m_SizeDelta: {x: 226.90002, y: 174.29999}
+  m_SizeDelta: {x: 226.90002, y: 72.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &682732358
 MonoBehaviour:
@@ -1017,3 +1017,4 @@ MonoBehaviour:
   starPrefab: {fileID: 1828593007767964549, guid: d292e1ab2af898b47ad3166320fb76bf, type: 3}
   wallPrefab: {fileID: 8825736409249075568, guid: 9164bcb7c6436c44aaf8877c809cd0ad, type: 3}
   boxPrefab: {fileID: 8530717710814739050, guid: 5cd18c62069dbf74cbbaf38f572253c0, type: 3}
+  backgroundPrefab: {fileID: 3737945391644626677, guid: 373b4fd5429eb2e4288678ffc520a217, type: 3}
