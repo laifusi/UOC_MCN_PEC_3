@@ -6,6 +6,7 @@ using System;
 
 public class EditorManager : MonoBehaviour
 {
+    [SerializeField] private Sprite emptySprite;
     [SerializeField] private Sprite characterSprite;
     [SerializeField] private Sprite starSprite;
     [SerializeField] private Sprite boxSprite;
@@ -96,6 +97,8 @@ public class EditorManager : MonoBehaviour
                 }
             }
         }
+
+        DeselectElement();
     }
 
     private void DestroyBackground()
@@ -153,8 +156,7 @@ public class EditorManager : MonoBehaviour
             }
         }
 
-        spriteToPlace = null;
-        elementToPlace = Element.Empty;
+        DeselectElement();
     }
 
     public void SelectElement(string elementChosen)
@@ -186,13 +188,14 @@ public class EditorManager : MonoBehaviour
 
     public void DeselectElement()
     {
-        spriteToPlace = null;
+        spriteToPlace = emptySprite;
         elementToPlace = Element.Empty;
+        MouseControl.Instance.SetSprite(emptySprite);
     }
 
     public void PlaceElement(int x, int y)
     {
-        if (x+gridX/2 >= 0 && y+gridY/2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && grid[x + gridX / 2, y + gridY / 2].IsAvailable && spriteToPlace != null)
+        if (x+gridX/2 >= 0 && y+gridY/2 >= 0 && x + gridX / 2 < gridX && y + gridY / 2 < gridY && grid[x + gridX / 2, y + gridY / 2].IsAvailable && spriteToPlace != emptySprite)
         {
             GameObject gameObject = Instantiate(placedObjectPrefab, new Vector3(x, y, 0), Quaternion.identity);
             gameObject.GetComponent<SpriteRenderer>().sprite = spriteToPlace;

@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: febd90f6aa4dd4542a4f43cb254ce362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emptySprite: {fileID: 21300000, guid: 26139d9a795bce946859679d6868cc78, type: 3}
   characterSprite: {fileID: 21300000, guid: 85a45a259417409438b200e21b3da1f6, type: 3}
   starSprite: {fileID: 21300000, guid: 069ce7aabef80084fb48575baa2ab8e6, type: 3}
   boxSprite: {fileID: 21300000, guid: 8b126b62817b80f46ad6fd4992c68f56, type: 3}
@@ -1004,7 +1005,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1839,18 +1840,18 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_SortingLayerID: 596617199
+  m_SortingLayer: 1
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 26139d9a795bce946859679d6868cc78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.3058104, y: 0.3058104}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1236386300
@@ -1942,22 +1943,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 78b23c0e-f2e5-4874-b5ac-38cc84ac6adf
     m_ActionName: Mouse/RightClick[/Mouse/rightButton]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1236386297}
-        m_TargetAssemblyTypeName: MouseControl, Assembly-CSharp
-        m_MethodName: MoveCamera
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7c09211d-171d-4fb8-ac04-4b7628031424
-    m_ActionName: Mouse/MoveCamera[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Mouse

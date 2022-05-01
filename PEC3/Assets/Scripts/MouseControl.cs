@@ -14,7 +14,7 @@ public class MouseControl : MonoBehaviour
 
     public static MouseControl Instance; //Instance of the MouseControl
 
-    private void Start()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -79,16 +79,9 @@ public class MouseControl : MonoBehaviour
         if (!context.started)
             return;
 
-        if(spriteRenderer.sprite == null)
-        {
-            int posx = (int)transform.position.x;
-            int posy = (int)transform.position.y;
-            EditorManager.Instance.DeleteElement(posx, posy);
-        }
-        else
-        {
-            spriteRenderer.sprite = null;
-            EditorManager.Instance.DeselectElement();
-        }
+        int posx = (int)transform.position.x;
+        int posy = (int)transform.position.y;
+        EditorManager.Instance.DeleteElement(posx, posy);
+        EditorManager.Instance.DeselectElement();
     }
 }
