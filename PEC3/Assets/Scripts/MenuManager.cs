@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -85,7 +87,8 @@ public class MenuManager : MonoBehaviour
 
         DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
         FileInfo[] levelsSaved = directoryInfo.GetFiles();
-        foreach(FileInfo level in levelsSaved)
+        FileInfo[] orderedLevels = levelsSaved.OrderBy(n => Regex.Replace(n.Name, @"\d+", n => n.Value.PadLeft(4, '0'))).ToArray();
+        foreach (FileInfo level in orderedLevels)
         {
             if(level.Name.Split(".txt")[1] == "")
             {
@@ -114,13 +117,14 @@ public class MenuManager : MonoBehaviour
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(LevelsPath);
         FileInfo[] filesFound = directoryInfo.GetFiles();
+        FileInfo[] orderedFiles = filesFound.OrderBy(n => Regex.Replace(n.Name, @"\d+", n => n.Value.PadLeft(4, '0'))).ToArray();
         List<FileInfo> levelsSaved = new List<FileInfo>();
         string levelToLoad = "";
-        for (int i = 0; i < filesFound.Length; i++)
+        for (int i = 0; i < orderedFiles.Length; i++)
         {
-            if (filesFound[i].Name.Split(".txt")[1] == "")
+            if (orderedFiles[i].Name.Split(".txt")[1] == "")
             {
-                levelsSaved.Add(filesFound[i]);
+                levelsSaved.Add(orderedFiles[i]);
             }
         }
         for (int i = 0; i < levelsSaved.Count; i++)
