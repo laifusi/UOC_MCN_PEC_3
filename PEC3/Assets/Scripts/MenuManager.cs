@@ -56,6 +56,11 @@ public class MenuManager : MonoBehaviour
         allData.height = height;
         allData.levelName = name;
         string json = JsonUtility.ToJson(allData);
+        if(File.Exists(LevelsPath + name + ".txt.meta"))
+        {
+            File.Delete(LevelsPath + name + ".txt.meta");
+            File.Delete(LevelsPath + name + ".txt");
+        }
         File.WriteAllText(LevelsPath + name + ".txt", json);
     }
 
