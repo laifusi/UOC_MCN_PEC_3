@@ -82,7 +82,6 @@ public class MenuManager : MonoBehaviour
         FileInfo[] levelsSaved = directoryInfo.GetFiles();
         foreach(FileInfo level in levelsSaved)
         {
-            Debug.Log(level.Name + " " + level.FullName);
             if(level.Name.Split(".txt")[1] == "")
             {
                 Button levelButton = Instantiate(levelButtonPrefab, levelsPanel).GetComponent<Button>();

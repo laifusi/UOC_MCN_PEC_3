@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Box : MonoBehaviour
@@ -15,8 +16,13 @@ public class Box : MonoBehaviour
         CharacterMovement.OnMovingBox += MoveBox;
     }
 
-    public void SetBoxSide(Side side, bool isTouching)
+    public IEnumerator SetBoxSide(Side side, bool isTouching)
     {
+        if (isTouching)
+            yield return new WaitForSeconds(0.01f);
+        else
+            yield return new WaitForSeconds(0f);
+
         switch (side)
         {
             case Side.Right:
@@ -34,8 +40,13 @@ public class Box : MonoBehaviour
         }
     }
 
-    public void SetWallSide(Side side, bool isTouching)
+    public IEnumerator SetWallSide(Side side, bool isTouching)
     {
+        if (isTouching)
+            yield return new WaitForSeconds(0.01f);
+        else
+            yield return new WaitForSeconds(0f);
+
         switch (side)
         {
             case Side.Right:
@@ -53,8 +64,13 @@ public class Box : MonoBehaviour
         }
     }
 
-    public void SetCharacterSide(Side side, bool isTouching)
+    public IEnumerator SetCharacterSide(Side side, bool isTouching)
     {
+        if (isTouching)
+            yield return new WaitForSeconds(0.01f);
+        else
+            yield return new WaitForSeconds(0f);
+
         switch (side)
         {
             case Side.Right:

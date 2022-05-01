@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,9 +63,14 @@ public class CharacterMovement : MonoBehaviour
         transform.position += new Vector3(direction.x, direction.y, 0);
     }
 
-    public void SetBoxSide(Side side, bool isTouching)
+    public IEnumerator SetBoxSide(Side side, bool isTouching)
     {
-        switch(side)
+        if (isTouching)
+            yield return new WaitForSeconds(0.01f);
+        else
+            yield return new WaitForSeconds(0f);
+
+        switch (side)
         {
             case Side.Right:
                 boxRight = isTouching;
@@ -81,8 +87,13 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    public void SetWallSide(Side side, bool isTouching)
+    public IEnumerator SetWallSide(Side side, bool isTouching)
     {
+        if (isTouching)
+            yield return new WaitForSeconds(0.01f);
+        else
+            yield return new WaitForSeconds(0f);
+
         switch (side)
         {
             case Side.Right:

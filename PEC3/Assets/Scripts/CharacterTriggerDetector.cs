@@ -9,11 +9,11 @@ public class CharacterTriggerDetector : MonoBehaviour
     {
         if(collision.CompareTag("Wall"))
         {
-            characterMovement.SetWallSide(side, true);
+            StartCoroutine(characterMovement.SetWallSide(side, true));
         }
         else if (collision.CompareTag("Box"))
         {
-            characterMovement.SetBoxSide(side, true);
+            StartCoroutine(characterMovement.SetBoxSide(side, true));
         }
     }
 
@@ -21,11 +21,11 @@ public class CharacterTriggerDetector : MonoBehaviour
     {
         if (collision.CompareTag("Wall"))
         {
-            characterMovement.SetWallSide(side, false);
+            StartCoroutine(characterMovement.SetWallSide(side, false));
         }
         else if (collision.CompareTag("Box"))
         {
-            characterMovement.SetBoxSide(side, false);
+            StartCoroutine(characterMovement.SetBoxSide(side, false));
         }
     }
 }

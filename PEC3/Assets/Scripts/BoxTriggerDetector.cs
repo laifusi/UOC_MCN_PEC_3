@@ -11,15 +11,15 @@ public class BoxTriggerDetector : MonoBehaviour
     {
         if (collision.CompareTag("Wall"))
         {
-            boxController.SetWallSide(side, true);
+            StartCoroutine(boxController.SetWallSide(side, true));
         }
         else if (collision.CompareTag("Box"))
         {
-            boxController.SetBoxSide(side, true);
+            StartCoroutine(boxController.SetBoxSide(side, true));
         }
         else if(collision.CompareTag("Player"))
         {
-            boxController.SetCharacterSide(side, true);
+            StartCoroutine(boxController.SetCharacterSide(side, true));
         }
     }
 
@@ -27,15 +27,15 @@ public class BoxTriggerDetector : MonoBehaviour
     {
         if (collision.CompareTag("Wall"))
         {
-            boxController.SetWallSide(side, false);
+            StartCoroutine(boxController.SetWallSide(side, false));
         }
         else if (collision.CompareTag("Box"))
         {
-            boxController.SetBoxSide(side, false);
+            StartCoroutine(boxController.SetBoxSide(side, false));
         }
         else if (collision.CompareTag("Player"))
         {
-            boxController.SetCharacterSide(side, false);
+            StartCoroutine(boxController.SetCharacterSide(side, false));
         }
     }
 }
